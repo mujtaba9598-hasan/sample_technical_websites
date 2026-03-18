@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luminous Therapeutics — Website Design Proposals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #0a1628 0%, #132744 40%, #1a3a5c 70%, #0f2940 100%);
+      color: #fff;
+      padding: 40px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle background glow */
+    body::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(46,196,182,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo-section {
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .logo-section img {
+      width: 180px;
+      height: auto;
+      filter: drop-shadow(0 4px 24px rgba(46,196,182,0.2));
+      border-radius: 16px;
+    }
+
+    .brand-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 400;
+      margin-top: 20px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #fff 0%, #a8d8d0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brand-sub {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(168, 216, 208, 0.6);
+      margin-top: 6px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #2EC4B6, transparent);
+      margin: 28px auto 12px;
+      animation: fadeIn 1s ease-out 0.3s both;
+    }
+
+    .intro-text {
+      text-align: center;
+      max-width: 520px;
+      margin-bottom: 48px;
+      animation: fadeIn 1s ease-out 0.4s both;
+    }
+
+    .intro-text h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 10px;
+    }
+
+    .intro-text p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 960px;
+      width: 100%;
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+
+    .option-card {
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px 28px 36px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .option-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .option-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(46,196,182,0.08);
+    }
+
+    .option-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Individual card accent colors */
+    .option-card:nth-child(1)::before { background: linear-gradient(90deg, #2EC4B6, #45d4c8); }
+    .option-card:nth-child(2)::before { background: linear-gradient(90deg, #C9703B, #d9874f); }
+    .option-card:nth-child(3)::before { background: linear-gradient(90deg, #6366F1, #818cf8); }
+
+    .option-card:nth-child(1):hover { background: rgba(46,196,182,0.06); border-color: rgba(46,196,182,0.2); }
+    .option-card:nth-child(2):hover { background: rgba(201,112,59,0.06); border-color: rgba(201,112,59,0.2); }
+    .option-card:nth-child(3):hover { background: rgba(99,102,241,0.06); border-color: rgba(99,102,241,0.2); }
+
+    .option-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .option-card:nth-child(1) .option-number { color: #2EC4B6; }
+    .option-card:nth-child(2) .option-number { color: #C9703B; }
+    .option-card:nth-child(3) .option-number { color: #6366F1; }
+
+    .option-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .option-card:nth-child(1) .option-icon { background: rgba(46,196,182,0.1); }
+    .option-card:nth-child(2) .option-icon { background: rgba(201,112,59,0.1); }
+    .option-card:nth-child(3) .option-icon { background: rgba(99,102,241,0.1); }
+
+    .option-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .option-card:nth-child(1) .option-icon svg { stroke: #2EC4B6; }
+    .option-card:nth-child(2) .option-icon svg { stroke: #C9703B; }
+    .option-card:nth-child(3) .option-icon svg { stroke: #6366F1; }
+
+    .option-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .option-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .option-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .option-card:hover .option-cta {
+      opacity: 1;
+    }
+
+    .option-card:nth-child(1) .option-cta { color: #2EC4B6; }
+    .option-card:nth-child(2) .option-cta { color: #C9703B; }
+    .option-card:nth-child(3) .option-cta { color: #6366F1; }
+
+    .option-cta svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .option-card:hover .option-cta svg {
+      transform: translateX(4px);
+    }
+
+    .footer-note {
+      margin-top: 56px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      animation: fadeIn 1s ease-out 0.8s both;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 400px;
+      }
+      .option-card {
+        padding: 32px 24px 28px;
+      }
+      body {
+        padding: 32px 20px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .options-grid {
+        gap: 20px;
+      }
+      .option-card {
+        padding: 32px 20px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-section">
+    <img src="Logo_opt2_Design.jpeg" alt="Luminous Therapeutics Logo">
+    <div class="brand-name">Luminous Therapeutics</div>
+    <div class="brand-sub">Medical Massage</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="intro-text">
+    <h2>Website Design Proposals</h2>
+    <p>Select a design direction to preview the full landing page experience.</p>
+  </div>
+
+  <div class="options-grid">
+
+    <a href="option1.html" class="option-card">
+      <div class="option-number">Option 01</div>
+      <div class="option-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="option-title">Clinical Precision</div>
+      <div class="option-desc">Clean, authoritative design with a dark navy header and teal accents. Built for trust and professionalism.</div>
+      <div class="option-cta">
+        View Design
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a href="option2.html" class="option-card">
+      <div class="option-number">Option 02</div>
+      <div class="option-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="option-title">Warm Editorial</div>
+      <div class="option-desc">Inviting, earthy aesthetic with warm tones and rounded elements. Feels approachable and nurturing.</div>
+      <div class="option-cta">
+        View Design
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a href="option3.html" class="option-card">
+      <div class="option-number">Option 03</div>
+      <div class="option-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="option-title">Modern Minimal</div>
+      <div class="option-desc">Bold, contemporary layout with vibrant accents and sharp geometry. Tech-forward and confident.</div>
+      <div class="option-cta">
+        View Design
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="footer-note">
+    Luminous Therapeutics Medical Massage &mdash; Design Proposals
+  </div>
+
+</body>
+</html>

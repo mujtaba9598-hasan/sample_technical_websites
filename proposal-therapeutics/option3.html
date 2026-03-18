@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luminous Therapeutics — Option 3 | Modern Minimal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif; color: #18181B;
+      background: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; font-weight: 700; line-height: 1.15; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 32px; border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.92rem;
+      cursor: pointer; transition: all 0.25s ease; border: none;
+    }
+    .btn-dark { background: #18181B; color: #fff; }
+    .btn-dark:hover { background: #27272A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .btn-accent { background: #6366F1; color: #fff; }
+    .btn-accent:hover { background: #4F46E5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,0.3); }
+    .btn-light { background: #F4F4F5; color: #18181B; }
+    .btn-light:hover { background: #E4E4E7; }
+    .btn-outline-dark { background: transparent; color: #18181B; border: 2px solid #E4E4E7; }
+    .btn-outline-dark:hover { border-color: #18181B; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: #6366F1; padding: 6px 14px;
+      background: rgba(99,102,241,0.08); border-radius: 8px;
+    }
+    .section-gap { padding: 112px 0; }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid #F4F4F5;
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: #71717A; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #18181B; }
+    .nav-item { position: relative; }
+    .nav-item > a { display: flex; align-items: center; gap: 4px; }
+    .nav-item > a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 12px); left: -16px; min-width: 240px;
+      background: #fff; border: 1px solid #F4F4F5; border-radius: 16px;
+      padding: 8px; opacity: 0; visibility: hidden; box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+      transform: translateY(4px); transition: all 0.2s ease;
+    }
+    .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown a { display: block; padding: 10px 14px; font-size: 0.88rem; border-radius: 10px; color: #52525B; }
+    .nav-dropdown a:hover { background: #F4F4F5; color: #18181B; }
+    .nav-cta {
+      background: #18181B; color: #fff !important; padding: 10px 22px;
+      border-radius: 10px; font-weight: 600 !important; font-size: 0.85rem !important;
+    }
+    .nav-cta:hover { background: #27272A; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 20px; height: 2px; background: #18181B; border-radius: 2px; transition: all 0.3s; }
+
+    @media (max-width: 900px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 72px; left: 0; right: 0;
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+        flex-direction: column; gap: 0; padding: 8px 0;
+        transform: translateY(-120%); opacity: 0; transition: all 0.3s ease;
+        border-bottom: 1px solid #F4F4F5;
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; }
+      .nav-links a { padding: 14px 24px; width: 100%; text-align: center; }
+      .nav-dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: none; border-radius: 0; background: #FAFAFA; }
+      .nav-cta { margin: 12px 24px; width: calc(100% - 48px); text-align: center; }
+    }
+
+    /* HERO */
+    .hero {
+      padding: 160px 0 100px; position: relative; overflow: hidden;
+      background: #fff;
+    }
+    .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-left .badge { margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); letter-spacing: -1px; margin-bottom: 20px; }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p { font-size: 1.08rem; color: #71717A; max-width: 460px; margin-bottom: 32px; line-height: 1.75; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    /* Hero Rating */
+    .hero-rating {
+      display: flex; align-items: center; gap: 12px; margin-top: 28px;
+      padding: 16px 22px; background: #FAFAFA; border: 1px solid #F4F4F5;
+      border-radius: 16px; width: fit-content;
+    }
+    .hero-rating-score {
+      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800; color: #18181B;
+      line-height: 1;
+    }
+    .hero-rating-info { display: flex; flex-direction: column; gap: 2px; }
+    .hero-rating-stars { display: flex; gap: 2px; }
+    .hero-rating-stars svg { width: 16px; height: 16px; fill: #F59E0B; }
+    .hero-rating-text { font-size: 0.78rem; color: #71717A; font-weight: 500; }
+
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 32px; padding-top: 32px; border-top: 1px solid #F4F4F5;
+    }
+    .hero-stat .num { font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800; color: #18181B; }
+    .hero-stat .label { font-size: 0.82rem; color: #A1A1AA; font-weight: 500; }
+
+    .hero-right { position: relative; }
+    .hero-grid-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .hv-card {
+      padding: 28px 20px; border-radius: 20px; border: 1px solid #F4F4F5;
+      background: #FAFAFA;
+    }
+    .hv-card.featured { background: #18181B; color: #fff; border-color: #18181B; grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+    .hv-card.featured .hv-num { color: #A78BFA; }
+    .hv-card.featured .hv-label { color: #A1A1AA; }
+    .hv-icon {
+      width: 40px; height: 40px; border-radius: 12px; margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hv-icon.purple { background: rgba(99,102,241,0.1); }
+    .hv-icon.dark { background: rgba(255,255,255,0.1); }
+    .hv-icon svg { width: 20px; height: 20px; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .hv-icon.purple svg { stroke: #6366F1; }
+    .hv-icon.dark svg { stroke: #A78BFA; }
+    .hv-num { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
+    .hv-label { font-size: 0.82rem; color: #71717A; }
+    .hv-title { font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+
+    @media (max-width: 768px) {
+      .hero .container { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-stats { gap: 24px; }
+    }
+
+    /* ABOUT */
+    .about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-left .badge { margin-bottom: 24px; }
+    .about-left h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.5px; margin-bottom: 16px; }
+    .about-left > p { font-size: 0.95rem; color: #71717A; line-height: 1.7; margin-bottom: 20px; }
+    .about-visual {
+      background: #FAFAFA; border: 1px solid #F4F4F5; border-radius: 24px; padding: 36px;
+    }
+    .about-visual-item { display: flex; gap: 16px; margin-bottom: 24px; }
+    .about-visual-item:last-child { margin-bottom: 0; }
+    .about-visual-icon {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+      background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center;
+    }
+    .about-visual-icon svg { width: 20px; height: 20px; stroke: #6366F1; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .about-visual-item h4 { font-size: 0.95rem; margin-bottom: 4px; letter-spacing: -0.2px; }
+    .about-visual-item p { font-size: 0.85rem; color: #71717A; line-height: 1.55; }
+
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    /* SERVICES */
+    .services { background: #FAFAFA; }
+    .services-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; flex-wrap: wrap; gap: 24px; }
+    .services-top-text { max-width: 500px; }
+    .services-top h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.5px; margin-top: 14px; }
+    .services-top p { font-size: 0.95rem; color: #71717A; margin-top: 10px; line-height: 1.65; }
+    .s-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .s-card {
+      background: #fff; border-radius: 20px; padding: 32px 24px;
+      border: 1px solid #F4F4F5; transition: all 0.25s ease; position: relative;
+    }
+    .s-card:hover { border-color: #6366F1; transform: translateY(-3px); box-shadow: 0 12px 36px rgba(99,102,241,0.08); }
+    .s-ico {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.08));
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    }
+    .s-ico svg { width: 20px; height: 20px; stroke: #6366F1; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .s-card h3 { font-size: 1.05rem; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .s-card p { font-size: 0.85rem; color: #71717A; line-height: 1.6; margin-bottom: 16px; }
+    .s-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .s-tag { font-size: 0.72rem; font-weight: 600; padding: 4px 10px; border-radius: 8px; background: #F4F4F5; color: #52525B; }
+
+    @media (max-width: 960px) { .s-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .s-grid { grid-template-columns: 1fr; } }
+
+    /* FULL BODY BANNER */
+    .fb-banner {
+      background: linear-gradient(135deg, #18181B, #27272A); position: relative; overflow: hidden;
+    }
+    .fb-banner::before {
+      content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%); border-radius: 50%;
+    }
+    .fb-banner .container {
+      position: relative; z-index: 1; padding: 56px 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+    }
+    .fb-banner h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: #fff; max-width: 500px; letter-spacing: -0.3px; }
+    .fb-banner h3 span { color: #A78BFA; }
+    .fb-meta { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+    .fb-meta .s-tag { background: rgba(255,255,255,0.1); color: #D4D4D8; }
+
+    /* TEAM */
+    .team { background: #FAFAFA; }
+    .team-top { text-align: center; margin-bottom: 56px; }
+    .team-top h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.5px; margin-top: 14px; }
+    .team-top p { font-size: 0.95rem; color: #71717A; max-width: 460px; margin: 10px auto 0; }
+    .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .t-card {
+      background: #fff; border-radius: 24px; padding: 40px 24px;
+      border: 1px solid #F4F4F5; text-align: center; transition: all 0.25s;
+    }
+    .t-card:hover { border-color: #6366F1; box-shadow: 0 8px 28px rgba(99,102,241,0.06); }
+    .t-ava {
+      width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 20px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff;
+    }
+    .t-card h3 { font-size: 1.05rem; letter-spacing: -0.3px; margin-bottom: 4px; }
+    .t-cred { font-size: 0.78rem; font-weight: 700; color: #6366F1; margin-bottom: 10px; }
+    .t-card p { font-size: 0.85rem; color: #71717A; max-width: 260px; margin: 0 auto; line-height: 1.55; }
+
+    @media (max-width: 640px) { .t-grid { grid-template-columns: 1fr; } }
+
+    /* PHOTOS */
+    .photos { background: #fff; }
+    .photos-top { text-align: center; margin-bottom: 56px; }
+    .photos-top h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.5px; margin-top: 14px; }
+    .photos-top p { font-size: 0.95rem; color: #71717A; max-width: 460px; margin: 10px auto 0; }
+    .photos-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    }
+    .photo-item {
+      border-radius: 16px; overflow: hidden; aspect-ratio: 1 / 1;
+      cursor: pointer; position: relative; border: 1px solid #F4F4F5;
+      transition: all 0.3s ease;
+    }
+    .photo-item:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+    .photo-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .photo-item:hover img { transform: scale(1.05); }
+    .photo-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.15));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .photo-item:hover::after { opacity: 1; }
+    .photo-zoom-icon {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+      width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.9);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: all 0.3s ease; z-index: 2;
+    }
+    .photo-zoom-icon svg { width: 18px; height: 18px; stroke: #18181B; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .photo-item:hover .photo-zoom-icon { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+    @media (max-width: 768px) { .photos-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 540px) { .photos-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Lightbox */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.92);
+      display: none; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .lightbox-overlay.active { display: flex; opacity: 1; }
+    .lightbox-overlay img {
+      max-width: 90vw; max-height: 90vh; border-radius: 12px; object-fit: contain;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 24px; width: 44px; height: 44px;
+      border-radius: 50%; background: rgba(255,255,255,0.1); border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-close svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px;
+      border-radius: 50%; background: rgba(255,255,255,0.1); border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-nav svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+
+    /* CONDITIONS */
+    .conditions { background: #fff; }
+    .conditions-top { text-align: center; margin-bottom: 48px; }
+    .conditions-top h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.5px; margin-top: 14px; }
+    .conditions-top p { font-size: 0.95rem; color: #71717A; max-width: 460px; margin: 10px auto 0; }
+    .c-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .c-item {
+      display: flex; align-items: center; gap: 10px; padding: 16px 18px;
+      background: #FAFAFA; border: 1px solid #F4F4F5; border-radius: 14px;
+      font-size: 0.88rem; font-weight: 500; color: #18181B; transition: all 0.2s;
+    }
+    .c-item:hover { border-color: #6366F1; background: rgba(99,102,241,0.03); }
+    .c-item svg { width: 18px; height: 18px; stroke: #6366F1; fill: none; stroke-width: 2; flex-shrink: 0; stroke-linecap: round; stroke-linejoin: round; }
+
+    @media (max-width: 960px) { .c-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .c-grid { grid-template-columns: 1fr; } }
+
+    /* TESTIMONIALS */
+    .testi { background: #FAFAFA; }
+    .testi-top { text-align: center; margin-bottom: 56px; }
+    .testi-top h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.5px; margin-top: 14px; }
+
+    /* Rating summary */
+    .rating-summary {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-top: 24px;
+    }
+    .rating-summary-score {
+      font-family: 'Sora', sans-serif; font-size: 3rem; font-weight: 800;
+      color: #18181B; line-height: 1;
+    }
+    .rating-summary-info { text-align: left; }
+    .rating-summary-stars { display: flex; gap: 2px; margin-bottom: 4px; }
+    .rating-summary-stars svg { width: 18px; height: 18px; fill: #F59E0B; }
+    .rating-summary-text { font-size: 0.85rem; color: #71717A; font-weight: 500; }
+
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .testi-card {
+      background: #fff; border-radius: 24px; padding: 32px; border: 1px solid #F4F4F5;
+    }
+    .testi-stars { display: flex; gap: 2px; margin-bottom: 16px; }
+    .testi-stars svg { width: 14px; height: 14px; fill: #F59E0B; }
+    .testi-card blockquote { font-size: 0.9rem; color: #3F3F46; line-height: 1.7; margin-bottom: 24px; }
+    .testi-who { display: flex; align-items: center; gap: 10px; }
+    .testi-av {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff; font-size: 0.75rem;
+    }
+    .testi-nm { font-weight: 600; font-size: 0.85rem; }
+    .testi-dt { font-size: 0.75rem; color: #A1A1AA; }
+    .testi-verified {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.7rem; font-weight: 600; color: #22C55E;
+      margin-left: 4px;
+    }
+    .testi-verified svg { width: 12px; height: 12px; fill: #22C55E; }
+
+    @media (max-width: 960px) { .testi-grid { grid-template-columns: 1fr; } }
+
+    /* INFO CARDS */
+    .info-section { background: #fff; }
+    .info-top { text-align: center; margin-bottom: 56px; }
+    .info-top h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.5px; margin-top: 14px; }
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .info-card {
+      background: #FAFAFA; border: 1px solid #F4F4F5; border-radius: 24px;
+      padding: 32px 24px; transition: all 0.25s;
+    }
+    .info-card:hover { border-color: #6366F1; box-shadow: 0 8px 28px rgba(99,102,241,0.06); }
+    .info-card-icon {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.08));
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    }
+    .info-card-icon svg { width: 20px; height: 20px; stroke: #6366F1; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .info-card h3 { font-size: 1.05rem; margin-bottom: 16px; letter-spacing: -0.3px; }
+    .info-card p, .info-card li { font-size: 0.85rem; color: #71717A; line-height: 1.7; }
+    .info-card ul { display: flex; flex-direction: column; gap: 6px; }
+    .info-card ul li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #F4F4F5; }
+    .info-card ul li:last-child { border-bottom: none; }
+    .info-card ul li span:first-child { font-weight: 500; color: #18181B; }
+    .info-card .detail-list { gap: 8px; }
+    .info-card .detail-list li { justify-content: flex-start; gap: 8px; border-bottom: none; padding: 4px 0; }
+    .info-card .detail-list li svg { width: 14px; height: 14px; stroke: #6366F1; fill: none; stroke-width: 2; flex-shrink: 0; stroke-linecap: round; stroke-linejoin: round; }
+    .info-card .cancel-text { font-size: 0.85rem; color: #71717A; line-height: 1.7; }
+    .info-card .fee-grid { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; margin-top: 12px; }
+    .info-card .fee-grid span { font-size: 0.82rem; padding: 4px 0; border-bottom: 1px solid #F4F4F5; }
+    .info-card .fee-grid span:nth-child(odd) { color: #52525B; }
+    .info-card .fee-grid span:nth-child(even) { color: #18181B; font-weight: 600; text-align: right; }
+
+    @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } }
+
+    /* CTA */
+    .cta-section {
+      text-align: center; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #18181B, #27272A);
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 60%); border-radius: 50%;
+    }
+    .cta-section .container { position: relative; z-index: 1; }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 2.8rem); color: #fff; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .cta-section h2 span { color: #A78BFA; }
+    .cta-section p { font-size: 1rem; color: #71717A; max-width: 440px; margin: 0 auto 36px; line-height: 1.65; }
+
+    /* FOOTER */
+    .footer { background: #18181B; padding: 72px 0 0; color: #71717A; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+    .footer-brand .f-logo { display: flex; align-items: center; margin-bottom: 16px; }
+    .footer-brand .f-logo img { height: 56px; width: auto; filter: brightness(0) invert(1); }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; max-width: 300px; }
+    .footer h4 {
+      font-family: 'Outfit', sans-serif; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; color: #A1A1AA; margin-bottom: 20px;
+    }
+    .footer ul li { margin-bottom: 10px; }
+    .footer ul li a { font-size: 0.88rem; transition: color 0.2s; }
+    .footer ul li a:hover { color: #A78BFA; }
+    .f-contact li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; }
+    .f-contact svg { width: 16px; height: 16px; stroke: #6366F1; fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 3px; stroke-linecap: round; stroke-linejoin: round; }
+    .footer-bottom {
+      margin-top: 48px; padding: 24px 0; border-top: 1px solid #27272A;
+      display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; color: #52525B;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 540px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo"><img src="Logo_opt2_Design.jpeg" alt="Luminous Therapeutics Medical Massage"></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#">Home</a>
+        <a href="#team">Our Team</a>
+        <div class="nav-item">
+          <a href="#services">Treatments <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown">
+            <a href="#services">Medical Massage</a>
+            <a href="#services">Manual Lymph Drainage</a>
+            <a href="#services">Pregnancy &amp; Postpartum</a>
+            <a href="#services">Structural Balancing</a>
+            <a href="#services">Cupping Therapy</a>
+            <a href="#services">Assisted Stretching</a>
+            <a href="#services">Full Body Massage</a>
+          </div>
+        </div>
+        <a href="#">Gift Certificates</a>
+        <a href="#">Blog</a>
+        <a href="#book" class="nav-cta">Book Now</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-left">
+        <span class="badge">Clinical Massage Therapy</span>
+        <h1>Your body deserves a<br><span class="highlight">smarter</span> recovery plan.</h1>
+        <p>Therapeutic bodywork that is precise, personalized, and accountable. Every session is measured, every outcome tracked.</p>
+        <div class="hero-buttons">
+          <a href="#book" class="btn btn-dark">Book Consultation</a>
+          <a href="#services" class="btn btn-outline-dark">See Treatments</a>
+        </div>
+        <div class="hero-rating">
+          <div class="hero-rating-score">4.9</div>
+          <div class="hero-rating-info">
+            <div class="hero-rating-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="hero-rating-text">12 Verified Reviews</div>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num">4.9</div>
+            <div class="label">Star Rating</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">12</div>
+            <div class="label">Verified Reviews</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">3</div>
+            <div class="label">Licensed Therapists</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-grid-visual">
+          <div class="hv-card featured">
+            <div class="hv-icon dark"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div class="hv-num">4.9</div>
+            <div class="hv-label">Star Rating from Verified Clients</div>
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #3F3F46;">
+              <div class="hv-title" style="color: #fff;">Personalized Plans</div>
+              <div class="hv-label">Tracked session to session</div>
+            </div>
+          </div>
+          <div class="hv-card">
+            <div class="hv-icon purple"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+            <div class="hv-title">Conditions Treated</div>
+            <div class="hv-num" style="color: #6366F1;">12+</div>
+          </div>
+          <div class="hv-card">
+            <div class="hv-icon purple"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="hv-title">Service Options</div>
+            <div class="hv-num" style="color: #6366F1;">7</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section-gap" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-left">
+          <span class="badge">About Us</span>
+          <h2>Precise. Personalized. Accountable.</h2>
+          <p>Luminous Therapeutics Medical Massage is built around one idea: therapeutic bodywork should be precise, personalized, and accountable. Every client receives a treatment plan tailored to their unique condition and goals, with progress tracked from session to session.</p>
+          <p>They work with chronic conditions -- degenerative disc disease, chronic fatigue syndrome, migraines -- and acute issues like athletic injuries, car accident recovery, and post-surgical rehabilitation. As a small, focused practice, every client gets the time and attention they deserve.</p>
+        </div>
+        <div class="about-visual">
+          <div class="about-visual-item">
+            <div class="about-visual-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div>
+              <h4>Tailored Treatment Plans</h4>
+              <p>Every client receives a protocol built around their specific condition and recovery goals.</p>
+            </div>
+          </div>
+          <div class="about-visual-item">
+            <div class="about-visual-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+            <div>
+              <h4>Progress Tracked</h4>
+              <p>Results are measured from session to session so you can see real improvement over time.</p>
+            </div>
+          </div>
+          <div class="about-visual-item">
+            <div class="about-visual-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg></div>
+            <div>
+              <h4>Small & Focused</h4>
+              <p>A dedicated team that gives every client the time, attention, and expertise they deserve.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section-gap" id="services">
+    <div class="container">
+      <div class="services-top">
+        <div class="services-top-text">
+          <span class="badge">Treatments</span>
+          <h2>Clinical modalities, not generic services.</h2>
+          <p>Every session is tailored to your condition and tracked against measurable outcomes.</p>
+        </div>
+        <a href="#book" class="btn btn-dark" style="flex-shrink: 0;">Book a Session</a>
+      </div>
+      <div class="s-grid">
+        <div class="s-card">
+          <div class="s-ico"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+          <h3>Medical Massage</h3>
+          <p>Clinical bodywork for diagnosed conditions. Pain reduction and function restoration through evidence-based protocols.</p>
+          <div class="s-tags"><span class="s-tag">60 min</span><span class="s-tag">80 min</span></div>
+        </div>
+        <div class="s-card">
+          <div class="s-ico"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+          <h3>Manual Lymph Drainage</h3>
+          <p>Specialized MLD for swelling reduction, immune support, and post-surgical healing by certified therapists.</p>
+          <div class="s-tags"><span class="s-tag">60 min</span><span class="s-tag">80 min</span></div>
+        </div>
+        <div class="s-card">
+          <div class="s-ico"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Pregnancy &amp; Postpartum</h3>
+          <p>Supportive massage for expectant and new mothers. Relieves discomfort, reduces swelling, aids recovery.</p>
+          <div class="s-tags"><span class="s-tag">30 min</span><span class="s-tag">60 min</span></div>
+        </div>
+        <div class="s-card">
+          <div class="s-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+          <h3>Structural Balancing</h3>
+          <p>Advanced bodywork to correct postural imbalances and address chronic musculoskeletal patterns.</p>
+          <div class="s-tags"><span class="s-tag">80 min</span></div>
+        </div>
+        <div class="s-card">
+          <div class="s-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <h3>Cupping Therapy</h3>
+          <p>Decompression therapy to release deep tension, improve circulation, and speed tissue recovery.</p>
+          <div class="s-tags"><span class="s-tag">30 min</span></div>
+        </div>
+        <div class="s-card">
+          <div class="s-ico"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
+          <h3>Assisted Stretching</h3>
+          <p>Guided flexibility work to expand range of motion and complement your clinical treatment plan.</p>
+          <div class="s-tags"><span class="s-tag">60 min</span><span class="s-tag">80 min</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL BODY BANNER -->
+  <section class="fb-banner">
+    <div class="container">
+      <div>
+        <h3>Full Body Massage -- <span>restorative relaxation</span> meets clinical expertise.</h3>
+        <div class="fb-meta"><span class="s-tag">60 min</span><span class="s-tag">80 min</span></div>
+      </div>
+      <a href="#book" class="btn btn-accent">Book This Session</a>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team section-gap" id="team">
+    <div class="container">
+      <div class="team-top">
+        <span class="badge">Our Team</span>
+        <h2>Licensed. Certified. Focused.</h2>
+        <p>Specialists in medical massage and manual lymph drainage with years of clinical practice.</p>
+      </div>
+      <div class="t-grid">
+        <div class="t-card">
+          <div class="t-ava">LV</div>
+          <h3>Lisa Verbitskaya</h3>
+          <div class="t-cred">LMT, MLD-C</div>
+          <p>Medical massage and certified manual lymph drainage specialist with extensive clinical experience.</p>
+        </div>
+        <div class="t-card">
+          <div class="t-ava" style="background: linear-gradient(135deg, #18181B, #3F3F46);">AN</div>
+          <h3>Ali Newbins</h3>
+          <div class="t-cred">LMT</div>
+          <p>Clinical bodywork, athletic recovery, and structural balancing focused therapist.</p>
+        </div>
+        <div class="t-card">
+          <div class="t-ava">MR</div>
+          <h3>Margo Rusin</h3>
+          <div class="t-cred">LMT, MLD-C</div>
+          <p>Manual lymph drainage and medical massage certified. Dedicated to measurable patient outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTOS -->
+  <section class="photos section-gap" id="photos">
+    <div class="container">
+      <div class="photos-top">
+        <span class="badge">Our Space</span>
+        <h2>Inside the practice.</h2>
+        <p>A calm, clinical environment designed for focused therapeutic work.</p>
+      </div>
+      <div class="photos-grid">
+        <div class="photo-item" onclick="openLightbox(0)">
+          <img src="p68Mt_temp_141120147_271893_$2023_05_04_01_01_18_6201.jpg" alt="Luminous Therapeutics practice photo 1" loading="lazy">
+          <div class="photo-zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="photo-item" onclick="openLightbox(1)">
+          <img src="ovH0s_temp_141120147_271893_$2023_04_24_00_43_25_1712.jpg" alt="Luminous Therapeutics practice photo 2" loading="lazy">
+          <div class="photo-zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="photo-item" onclick="openLightbox(2)">
+          <img src="Jpzot_temp_141120147_271893_$2023_05_04_01_01_43_1776.jpg" alt="Luminous Therapeutics practice photo 3" loading="lazy">
+          <div class="photo-zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="photo-item" onclick="openLightbox(3)">
+          <img src="s8v6w_temp_141120147_271893_$2023_05_04_01_02_22_0268.jpg" alt="Luminous Therapeutics practice photo 4" loading="lazy">
+          <div class="photo-zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+        <div class="photo-item" onclick="openLightbox(4)">
+          <img src="zpyto_temp_141120147_271893_$2023_05_04_01_06_32_5372.jpg" alt="Luminous Therapeutics practice photo 5" loading="lazy">
+          <div class="photo-zoom-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close lightbox"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)" aria-label="Previous photo"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <img id="lightboxImg" src="" alt="Enlarged photo">
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)" aria-label="Next photo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+
+  <!-- CONDITIONS -->
+  <section class="conditions section-gap" id="conditions">
+    <div class="container">
+      <div class="conditions-top">
+        <span class="badge">Conditions</span>
+        <h2>What we treat.</h2>
+        <p>Clinical protocols for a wide range of musculoskeletal and soft-tissue conditions.</p>
+      </div>
+      <div class="c-grid">
+        <div class="c-item"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Chronic Pain</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>Migraines &amp; Headaches</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>Degenerative Disc Disease</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Athletic Injuries</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Car Accident Recovery</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/></svg>Chronic Fatigue Syndrome</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>Lymphedema</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Post-Surgical Recovery</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>Sciatica &amp; Back Pain</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Frozen Shoulder</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Prenatal Discomfort</div>
+        <div class="c-item"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>Limited Mobility</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi section-gap" id="testimonials">
+    <div class="container">
+      <div class="testi-top">
+        <span class="badge">Reviews</span>
+        <h2>Patients talk. Results show.</h2>
+        <div class="rating-summary">
+          <div class="rating-summary-score">4.9</div>
+          <div class="rating-summary-info">
+            <div class="rating-summary-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="rating-summary-text">12 Verified Reviews</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <blockquote>"I absolutely love the lymphatic drainage sessions here. Lisa is so caring and genuinely goes above and beyond for every client. You can tell she truly cares about your wellbeing and recovery."</blockquote>
+          <div class="testi-who"><div class="testi-av">AM</div><div><div class="testi-nm">Allyson M. <span class="testi-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified</span></div><div class="testi-dt">Sep 2024</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <blockquote>"Everything is so organized and efficient. I had an injury that lingered for over two years and Lisa's knowledge of medical massage made a real difference. She knew exactly how to approach it."</blockquote>
+          <div class="testi-who"><div class="testi-av">MW</div><div><div class="testi-nm">Melissa W. <span class="testi-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified</span></div><div class="testi-dt">Aug 2024</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <blockquote>"This place is a hidden gem. Lisa found every single source of tension causing my neck pain. I've tried many things over the years and nothing has given me as much relief as her work."</blockquote>
+          <div class="testi-who"><div class="testi-av">YB</div><div><div class="testi-nm">Yulia B. <span class="testi-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified</span></div><div class="testi-dt">May 2023</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <blockquote>"After just one session I forgot about my chronic back pain for six months. That's never happened before with any other treatment. I keep coming back and the results are consistently great."</blockquote>
+          <div class="testi-who"><div class="testi-av">IB</div><div><div class="testi-nm">Inna B. <span class="testi-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified</span></div><div class="testi-dt">May 2023</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <blockquote>"Lisa is a miracle worker. I came in with terrible hip and leg pain and she identified the issue immediately. She is extremely knowledgeable and I felt relief after the very first visit."</blockquote>
+          <div class="testi-who"><div class="testi-av">MD</div><div><div class="testi-nm">Marie D. <span class="testi-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified</span></div><div class="testi-dt">Mar 2024</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <blockquote>"Top notch expertise. I noticed real benefits after just two sessions. You can tell this is a highly skilled practitioner who understands the body at a deep level. Can't recommend enough."</blockquote>
+          <div class="testi-who"><div class="testi-av">NT</div><div><div class="testi-nm">Nancy T. <span class="testi-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Verified</span></div><div class="testi-dt">Oct 2023</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO SECTION -->
+  <section class="info-section section-gap" id="info">
+    <div class="container">
+      <div class="info-top">
+        <span class="badge">Info</span>
+        <h2>Everything you need to know.</h2>
+      </div>
+      <div class="info-grid">
+        <!-- Hours Card -->
+        <div class="info-card">
+          <div class="info-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <h3>Hours</h3>
+          <ul>
+            <li><span>Mon</span><span>10:00am - 2:00pm</span></li>
+            <li><span>Tue</span><span>8:20am - 12:40pm</span></li>
+            <li><span>Wed</span><span>8:00am - 1:00pm</span></li>
+            <li><span>Thu</span><span>8:00am - 3:00pm</span></li>
+            <li><span>Fri</span><span>9:00am - 4:00pm</span></li>
+            <li><span>Sat</span><span>9:00am - 4:00pm</span></li>
+            <li><span>Sun</span><span>Closed</span></li>
+          </ul>
+        </div>
+        <!-- Details Card -->
+        <div class="info-card">
+          <div class="info-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <h3>Details</h3>
+          <ul class="detail-list">
+            <li><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Languages: English, Russian</span></li>
+            <li><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free parking available</span></li>
+            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg><span>Disabled access</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Kid friendly</span></li>
+            <li><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Visa, MC, Amex, Discover, Cash, Debit</span></li>
+          </ul>
+        </div>
+        <!-- Cancellation Card -->
+        <div class="info-card">
+          <div class="info-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <h3>Cancellation Policy</h3>
+          <p class="cancel-text">24-hour notice is required for all cancellations. Late cancellation fees apply:</p>
+          <div class="fee-grid">
+            <span>60-min Massage</span><span>$35</span>
+            <span>80-min Massage</span><span>$55</span>
+            <span>60-min MLD</span><span>$50</span>
+            <span>80-min MLD</span><span>$65</span>
+          </div>
+          <p class="cancel-text" style="margin-top: 12px; font-weight: 500; color: #18181B;">No-shows are charged the full session price.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section section-gap" id="book">
+    <div class="container">
+      <h2>Ready to start your<br><span>recovery?</span></h2>
+      <p>Schedule a consultation and let us build a treatment plan around your specific condition and goals.</p>
+      <a href="#" class="btn btn-accent">Book Your Consultation</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="f-logo">
+            <img src="Logo_opt2_Design.jpeg" alt="Luminous Therapeutics">
+          </div>
+          <p>Clinical-grade therapeutic massage in Jacksonville, FL. Precise, personalized, and accountable bodywork for lasting results.</p>
+        </div>
+        <div>
+          <h4>Treatments</h4>
+          <ul>
+            <li><a href="#">Medical Massage</a></li>
+            <li><a href="#">Manual Lymph Drainage</a></li>
+            <li><a href="#">Pregnancy &amp; Postpartum</a></li>
+            <li><a href="#">Structural Balancing</a></li>
+            <li><a href="#">Cupping Therapy</a></li>
+            <li><a href="#">Assisted Stretching</a></li>
+            <li><a href="#">Full Body Massage</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Hours</h4>
+          <ul>
+            <li><a href="#">Mon: 10am - 2pm</a></li>
+            <li><a href="#">Tue: 8:20am - 12:40pm</a></li>
+            <li><a href="#">Wed: 8am - 1pm</a></li>
+            <li><a href="#">Thu: 8am - 3pm</a></li>
+            <li><a href="#">Fri: 9am - 4pm</a></li>
+            <li><a href="#">Sat: 9am - 4pm</a></li>
+            <li><a href="#">Sun: Closed</a></li>
+          </ul>
+          <h4 style="margin-top: 24px;">Links</h4>
+          <ul>
+            <li><a href="#">Gift Certificates</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="f-contact">
+            <li><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>14797 Philips Hwy, STE 206<br>Jacksonville, FL 32256</li>
+            <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(904) 321-9065</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Luminous Therapeutics. All rights reserved.</span>
+        <span>Option 3 — Modern Minimal Design</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    // Lightbox
+    const lightboxImages = [
+      'p68Mt_temp_141120147_271893_$2023_05_04_01_01_18_6201.jpg',
+      'ovH0s_temp_141120147_271893_$2023_04_24_00_43_25_1712.jpg',
+      'Jpzot_temp_141120147_271893_$2023_05_04_01_01_43_1776.jpg',
+      's8v6w_temp_141120147_271893_$2023_05_04_01_02_22_0268.jpg',
+      'zpyto_temp_141120147_271893_$2023_05_04_01_06_32_5372.jpg'
+    ];
+    let currentLightboxIndex = 0;
+    const lightboxOverlay = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      lightboxImg.src = lightboxImages[index];
+      lightboxOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightboxOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navLightbox(dir) {
+      currentLightboxIndex = (currentLightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+      lightboxImg.src = lightboxImages[currentLightboxIndex];
+    }
+
+    // Close lightbox on overlay click
+    lightboxOverlay.addEventListener('click', function(e) {
+      if (e.target === lightboxOverlay) closeLightbox();
+    });
+
+    // Close lightbox on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (!lightboxOverlay.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+  </script>
+</body>
+</html>
