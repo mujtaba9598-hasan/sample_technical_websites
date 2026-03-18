@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Services — Website Design Portfolio</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #818cf8;
+            box-shadow: 0 8px 30px rgba(129, 140, 248, 0.15);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-number {
+            display: inline-block;
+            background: #818cf8;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            margin-bottom: 0.75rem;
+            width: fit-content;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+        .tag {
+            background: #334155;
+            color: #cbd5e1;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.375rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #6366f1, #818cf8);
+            color: #fff;
+            text-decoration: none;
+            padding: 0.65rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+            width: fit-content;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.5rem; }
+            .grid { grid-template-columns: 1fr; padding: 0 1rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Website Design Portfolio</h1>
+        <p>Browse through different website designs built for a technical services company. Each option showcases a unique layout, style, and feature set.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-number">01</span>
+                <h2>Modern Redesign — Standalone</h2>
+                <p>Full-featured single-page design with dark mode toggle, smooth animations, and a clean corporate layout. Includes project gallery and contact form.</p>
+                <div class="tags">
+                    <span class="tag">Dark Mode</span>
+                    <span class="tag">Animations</span>
+                    <span class="tag">Single Page</span>
+                    <span class="tag">Tailwind</span>
+                </div>
+                <a href="Saqtech_Stand1_v1.html" class="btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Design
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-number">02</span>
+                <h2>Excellence in Engineering — v2</h2>
+                <p>Refined design with Lucide icons, dark/light mode, and a modern card-based services section. Clean typography with gradient accents.</p>
+                <div class="tags">
+                    <span class="tag">Dark Mode</span>
+                    <span class="tag">Lucide Icons</span>
+                    <span class="tag">Single Page</span>
+                </div>
+                <a href="Saqtech_mod_v2.html" class="btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Design
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-number">03</span>
+                <h2>Excellence in Engineering — Flip Cards</h2>
+                <p>Distinctive flip-card animations for services, interactive hover effects, and a bold section layout. Unique approach to showcasing capabilities.</p>
+                <div class="tags">
+                    <span class="tag">Flip Cards</span>
+                    <span class="tag">Interactive</span>
+                    <span class="tag">Single Page</span>
+                </div>
+                <a href="Saqtech_mod2_v1.html" class="btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Design
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-number">04</span>
+                <h2>Precision Engineering</h2>
+                <p>Premium dark-themed design with gradient text, glassmorphism effects, and a polished contact section. Strong visual hierarchy throughout.</p>
+                <div class="tags">
+                    <span class="tag">Dark Mode</span>
+                    <span class="tag">Glassmorphism</span>
+                    <span class="tag">Gradients</span>
+                    <span class="tag">Single Page</span>
+                </div>
+                <a href="Saqtech.html" class="btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Design
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-number">05</span>
+                <h2>Swiper Slider — Dark/Light</h2>
+                <p>Feature-rich design with Swiper.js hero slider, full dark/light mode, Tailwind CSS and Alpine.js. Dynamic image carousel with smooth transitions.</p>
+                <div class="tags">
+                    <span class="tag">Swiper.js</span>
+                    <span class="tag">Dark Mode</span>
+                    <span class="tag">Tailwind</span>
+                    <span class="tag">Alpine.js</span>
+                    <span class="tag">Single Page</span>
+                </div>
+                <a href="web3.html" class="btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Design
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-number">06</span>
+                <h2>Full Dashboard — Advanced</h2>
+                <p>Most advanced single-page design with Swiper slider, dark mode, animated counters, and comprehensive admin-ready structure. Full-featured layout.</p>
+                <div class="tags">
+                    <span class="tag">Swiper.js</span>
+                    <span class="tag">Dark Mode</span>
+                    <span class="tag">Tailwind</span>
+                    <span class="tag">Alpine.js</span>
+                    <span class="tag">Counters</span>
+                    <span class="tag">Single Page</span>
+                </div>
+                <a href="web4.html" class="btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Design
+                </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-number">07</span>
+                <h2>Multi-Page Production Site</h2>
+                <p>Complete multi-page website with separate Home, About, Services, Projects, and Contact pages. Production-ready with proper routing and SEO structure.</p>
+                <div class="tags">
+                    <span class="tag">Multi-Page</span>
+                    <span class="tag">Production</span>
+                    <span class="tag">SEO Ready</span>
+                    <span class="tag">5 Pages</span>
+                </div>
+                <a href="saqtech-production/index.html" class="btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Design
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Sample designs for demonstration purposes only. All contact information shown is fictional.
+    </div>
+
+</body>
+</html>
